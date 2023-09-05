@@ -66,20 +66,17 @@ def fetch_livedata(email):
 
         driver.get("https://admin.google.com/")
 
-        search_box = wait.until(EC.element_to_be_clickable(
-            (By.CSS_SELECTOR, 'input[aria-label="Search for users, groups or settings"]')))
+        search_box = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'input[aria-label="Search for users, groups or settings"]')))
         search_box.clear()
         search_box.send_keys(email)
 
         try:
             first_user_option = wait.until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.MkjOTb.oKubKe.nwSHjc[data-index="0"]'))
-            )
+                EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.MkjOTb.oKubKe.nwSHjc[data-index="0"]')))
             first_user_option.click()
         except StaleElementReferenceException:
             first_user_option = wait.until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.MkjOTb.oKubKe.nwSHjc[data-index="0"]'))
-            )
+                EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.MkjOTb.oKubKe.nwSHjc[data-index="0"]')))
             first_user_option.click()
 
         try:
