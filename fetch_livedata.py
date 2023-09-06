@@ -72,11 +72,11 @@ def fetch_livedata(email):
 
         try:
             first_user_option = wait.until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.MkjOTb.oKubKe.nwSHjc[data-index="0"]')))
+                EC.element_to_be_clickable((By.XPATH, f"//div[contains(@data-hinttext, '{email}')]")))
             first_user_option.click()
         except StaleElementReferenceException:
             first_user_option = wait.until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.MkjOTb.oKubKe.nwSHjc[data-index="0"]')))
+                EC.element_to_be_clickable((By.XPATH, f"//div[contains(@data-hinttext, '{email}')]")))
             first_user_option.click()
 
         try:
@@ -87,7 +87,7 @@ def fetch_livedata(email):
                 storage_amount_element = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div.zhGlPe')))
                 storage_amount = parse_storage_string(storage_amount_element.text)
             except TimeoutException as e:
-                print(f"Neither span.PZFh5b nor div.zhGlPe were found: {e}")
+                print(f"For user {email} neither span.PZFh5b nor div.zhGlPe were found: {e}")
                 storage_amount = None
 
         if storage_amount is not None:
